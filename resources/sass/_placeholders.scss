@@ -1,0 +1,65 @@
+// TODO
+%ignore-br {
+    @include ignore-br();
+}
+
+// Cover
+%cover {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    height: initial;
+    width: initial;
+    min-height: 100%;
+    max-width: initial;
+    overflow: hidden;
+
+    @include query-768() {
+        width: initial;
+        min-height: 100vh;
+        height: 100vh;
+        min-width: 100%;
+    }
+}
+
+// Hidden Items
+%hide {
+    transition: visibility $speed linear 0s, opacity $speed ease-in-out;
+    visibility: visible;
+    opacity: 1;
+
+    &.hdn {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+// Ellipsis
+%ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Transitions
+%fade {
+    transition: visibility $speed linear 0s, opacity $speed ease-in;
+}
+
+// Hover Opacity
+%hover-opacity {
+    @include hover-opacity();
+}
+
+%reverse {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+%wrapper {
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    max-width: 1170px;
+}

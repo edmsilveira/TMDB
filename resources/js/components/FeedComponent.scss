@@ -1,0 +1,80 @@
+@import "../../sass/variables.scss";
+@import "../../sass/mixins.scss";
+
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content {
+    display: block;
+    width: 100%;
+}
+
+.p-orn {
+    display: block;
+    box-sizing: border-box;
+
+}
+
+.it {
+    display: block;
+    width: 500px;
+    padding: 30px;
+    box-sizing: border-box;
+
+    &-lnk {
+        text-decoration: none;
+        cursor: pointer;
+        display: block;
+    }
+
+    &-ttl,
+    &-txt {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    &-img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+}
+
+.filter {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 300px;
+    z-index: 20;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+
+    &.ac {
+        opacity: 1;
+        visibility: visible
+    }
+
+    input {
+        padding: 10px;
+        border: solid lightpink;
+        border-radius: 10px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    span {
+        display: block;
+        margin: 5px 0;
+        font-weight: 800;
+    }
+}
+

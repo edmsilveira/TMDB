@@ -1,0 +1,120 @@
+// VARIABLES
+// Base Colors
+$color-black:                       rgba(5, 0, 0, .9);
+$color-white:                       #FFF;
+
+$color-white-medium:                rgba(255, 255, 255, .5);
+$color-white-light:                 rgba(255, 255, 255, .3);
+$color-black-medium:                rgba(5, 0, 0, .5);
+$color-black-light:                 rgba(5, 0, 0, .3);
+$color-black-light-2:               rgba(5, 0, 0, .05);
+
+$color-accent:                      #0663B9;
+$color-accent-2:                    #F6AA00;
+$color-accent-3:                    #0558A4;
+$color-red:                         #EC6B6D;
+$color-green:                       #90C365;
+
+$color-bg:                          #F0F8FF;
+
+
+// Screen sizes
+$vw-7680:                           7680;
+$vw-3840:                           3840;
+$vw-2560:                           2560;
+$vw-1920:                           1920;
+$vw-1366:                           1366;
+$vw-1280:                           1280;
+$vw-1024:                           1024;
+$vw-960:                            960;
+$vw-768:                            768;
+$vw-640:                            640;
+$vw-480:                            480;
+$vw-414:                            414;
+$vw-375:                            375;
+$vw-320:                            320;
+
+
+// Defaults
+$speed:                             .5s;
+$opacity:                           .6;
+$selection-color:                   $color-black-medium;
+
+
+// Buttons
+$btn-height:                        50px;
+$btn-small-height:                  30px;
+
+// Header
+$header-height-fixed:               120px;
+$header-height-scroll:              86px;
+$header-height-mb:                  75px;
+
+
+// Grid
+
+// FHD
+// 1920 >> 1920
+$max-width-fhd:                     1880px;
+$col-fhd:                           75px;   //20col
+$gutter-fhd:                        20px;
+$offset-fhd:                        20px;
+
+// HD
+// 1366 >> 1366
+$max-width-hd:                      1280px;
+$col-hd:                            45px;   //20col
+$gutter-hd:                         20px;
+$offset-hd:                         43px;
+
+// 1170 >> 1024
+$max-width-tb:                      984px;
+$col-tb:                            231px;   //4col
+$gutter-tb:                         20px;
+$offset-tb:                         20px;
+
+// 960 >> 768
+$max-width-ph:                      728px;
+$col-ph:                            354px;   //2col
+$gutter-ph:                         20px;
+$offset-ph:                         20px;
+
+// Mobile
+// 480 >> 320
+$max-width-mb:                      290px;
+$col-mb:                            135px;   //2col
+$gutter-mb:                         20px;
+$offset-mb:                         15px;
+
+
+// Z-index;
+$z-grid:                            25;
+$z-loader:                          20;
+$z-header:                          15;
+$z-footer:                          10;
+$z-floating:                        5;
+
+
+
+
+
+
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family: "Nunito", sans-serif;
+$font-size: 14px;
+$line-height: 18px;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66D9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;

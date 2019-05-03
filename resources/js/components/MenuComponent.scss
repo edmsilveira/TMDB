@@ -1,0 +1,23 @@
+.menu {
+    display: block;
+    width: 300px;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.menu-content {
+    display: block;
+    list-style: none;
+    width: 250px;
+    padding: 0 10px;
+}
+
+.menu-it {
+    display: inline-block;
+}
+
+.menu-it a {
+    text-decoration: none;
+    color: green;
+}

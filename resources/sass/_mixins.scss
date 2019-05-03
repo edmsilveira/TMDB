@@ -1,0 +1,236 @@
+// MIXINS
+@function decimal-round ($number, $digits: 0, $mode: round) {
+    $n: 1;
+    // $number must be a number
+    @if type-of($number) != number {
+        @warn '#{ $number } is not a number.';
+        @return $number;
+    }
+    // $digits must be a unitless number
+    @if type-of($digits) != number {
+        @warn '#{ $digits } is not a number.';
+        @return $number;
+    } @else if not unitless($digits) {
+        @warn '#{ $digits } has a unit.';
+        @return $number;
+    }
+    @if $digits > 0 {
+        @for $i from 1 through $digits {
+            $n: $n * 10;
+        }
+    }
+    @if $mode == decimal-round {
+        @return decimal-round($number * $n) / $n;
+    } @else if $mode == ceil {
+        @return ceil($number * $n) / $n;
+    } @else if $mode == floor {
+        @return floor($number * $n) / $n;
+    } @else {
+        @warn '#{ $mode } is undefined keyword.';
+        @return $number;
+    }
+}
+
+@mixin ignore-br() {
+    br {
+        content: ' ';
+
+        &:after {
+            content: ' ';
+        }
+    }
+}
+
+// Typography
+@mixin proportional-line($font-size, $line-height) {
+    line-height: decimal-round($line-height / $font-size, 2) * 1em;
+}
+
+// Sizes
+@mixin proportional-element($property, $size, $vw: $vw-1366) {
+    #{$property}: decimal-round(($size / $vw) * 100vw, 2);
+}
+
+@mixin to-em($property, $size) {
+    #{$property}: #{decimal-round(($size / 16), 3)}em;
+}
+
+@mixin proportional-media($width, $height, $vw: $vw-1366) {
+    width: decimal-round(($width / $vw) * 100vw, 2);
+    height: decimal-round(($height / $vw) * 100vw, 2);
+}
+
+@mixin proportional-height-aspect($original-width, $original-height, $new-width, $vw: $vw-320) {
+    // Preserve aspect ratio
+    // Find new Height
+    // (original height / original width) x new width = new height
+
+    width: decimal-round(($new-width / $vw) * 100vw, 2);
+    height: decimal-round(((($original-height / $original-width) * $new-width) / $vw) * 100vw , 2);
+}
+
+@mixin proportional-shorthand($parameters, $property, $top-bottom, $right-left, $vw: $vw-1366) {
+    @if($parameters == 2) {
+        $t: decimal-round((($top-bottom / $vw-1366) * 100vw), 2);
+        $l: decimal-round((($right-left / $vw-1366) * 100vw), 2);
+
+        #{$property}: $t $l;
+    }
+    @if($parameters == 3) {
+        $t: decimal-round(($top / $vw) * 100vw, 2);
+        $l: decimal-round(($right-left / $vw) * 100vw, 2);
+        $b: decimal-round(($bottom / $vw) * 100vw, 2);
+
+        #{$property}: $t $l $b;
+    }
+    @if($parameters == 4) {
+        $t: decimal-round(($top / $vw) * 100vw, 2);
+        $r: decimal-round(($right / $vw) * 100vw, 2);
+        $b: decimal-round(($bottom / $vw) * 100vw, 2);
+        $l: decimal-round(($left / $vw) * 100vw, 2);
+
+        #{$property}: $t $r $b $l;
+    }
+}
+
+// Position
+@mixin vertical-center() {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin position-elements($width, $height, $top, $left, $vw: $vw-1366) {
+    @include proportional-element(width, $width, $vw);
+    @include proportional-element(height, $height, $vw);
+    @include proportional-element(top, $top, $vw);
+    @include proportional-element(left, $left, $vw);
+
+    position: absolute;
+}
+
+@mixin position-mobile($width, $height, $left, $top) {
+    @include query-480() {
+        @include proportional-element(width, $width, $vw-320);
+        @include proportional-element(height, $height, $vw-320);
+        @include proportional-element(top, $top, $vw-320);
+        @include proportional-element(left, $left, $vw-320);
+    }
+}
+
+// Reset list
+@mixin reset-list($padding: 0, $margin: 0) {
+    margin: $margin;
+    padding: $padding;
+    list-style-type: none;
+}
+
+// Reset buttons
+@mixin reset-button($padding: 0) {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: $padding;
+    user-select: none;
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+// Hover
+@mixin hover-opacity($duration: $speed) {
+    transition: opacity ease-in-out $speed;
+    opacity: 1;
+
+    &:hover {
+        opacity: $opacity;
+    }
+}
+
+// Media Queries
+@mixin query-uhd() {
+    @media (max-width: $vw-3840) {
+        @content;
+    }
+}
+
+@mixin query-qhd() {
+    @media (max-width: $vw-2560) {
+        @content;
+    }
+}
+
+@mixin query-fhd() {
+    @media (max-width: $vw-1920) {
+        @content;
+    }
+}
+
+@mixin query-hd() {
+    @media (max-width: $vw-1366) {
+        @content;
+    }
+}
+
+@mixin query-1280() {
+    @media (max-width: $vw-1280) {
+        @content;
+    }
+}
+
+// 1170px >> 1024px
+@mixin query-1170() {
+    @media (max-width: 1170px) {
+        @content;
+    }
+}
+
+// 960px >> 768px
+@mixin query-960() {
+    @media (max-width: $vw-960) {
+        @content;
+    }
+}
+
+@mixin query-768() {
+    @media (max-width: $vw-768){
+        @content;
+    }
+}
+
+@mixin query-640() {
+    @media (max-width: $vw-640) {
+        @content;
+    }
+}
+
+@mixin query-480() {
+    @media (max-width: $vw-480) {
+        @content;
+    }
+}
+
+@mixin query-414() {
+    @media (max-width: $vw-414) {
+        @content;
+    }
+}
+
+@mixin query-375() {
+    @media (max-width: $vw-375) {
+        @content;
+    }
+}
+
+@mixin query-320() {
+    @media (max-width: $vw-320) {
+        @content;
+    }
+}
+
+@mixin query-height($height) {
+    @media (max-height: $height) {
+        @content;
+    }
+}
