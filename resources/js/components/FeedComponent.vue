@@ -85,8 +85,8 @@
                     this.modalContent.href = href;
 
                     this.key = id;
-
                     this.getDetails(this);
+
                     this.postHandler(href);
                     this.showModal = true;
                 }
