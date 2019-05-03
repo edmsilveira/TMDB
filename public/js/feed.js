@@ -25646,7 +25646,7 @@ Vue.prototype.getMovies = function (component) {
     var query = window.location.search.substring(1),
         params = new URLSearchParams(query),
         key = params.get('q'),
-        upcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=pt-BR&page=' + component.i;
+        upcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en&page=' + component.i;
 
     component.query = key !== null ? key : '';
     component.requesting = true;
@@ -31294,7 +31294,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             requested: false,
             requesting: false,
             showModal: false,
-            modalContent: { html: '', info: [], href: '' },
+            modalContent: { html: '', info: {}, href: '' },
             query: '',
             posts: []
         };
@@ -31345,12 +31345,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 this.modalContent.href = href;
 
+                this.getDetails();
                 this.postHandler(href);
                 this.showModal = true;
             }
         },
-        getInfo: function getInfo(post) {
-            this.modalContent.info = post;
+        getDetails: function getDetails(id) {
+            var info = {};
+            axios.get('https://api.themoviedb.org/3/movie/' + id + '?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en').then(function (details) {
+                info = details.data;
+                console.log(info);
+            });
         }
     },
     beforeMount: function beforeMount() {
@@ -31419,8 +31424,7 @@ var render = function() {
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            _vm.clickModal($event),
-                              _vm.getInfo(_vm.posts[index])
+                            _vm.clickModal($event), _vm.getDetails(post.id)
                           }
                         }
                       },

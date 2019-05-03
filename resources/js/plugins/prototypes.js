@@ -27,7 +27,7 @@ Vue.prototype.getMovies = function (component) {
     let query = window.location.search.substring(1),
     params = new URLSearchParams(query),
     key = params.get('q'),    
-    upcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=pt-BR&page=${component.i}`;
+    upcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en&page=${component.i}`;
 
 
 component.query = key !== null ? key : '';

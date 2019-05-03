@@ -11,7 +11,7 @@
             <h1 v-if="requesting">Loading...</h1>
             <div v-if="posts.length" v-masonry transition-duration="0s" item-selector=".it">
                 <div v-masonry-tile class="it" v-for="(post, index) in posts" :id="index" :key="index">
-                    <a class="it-lnk" :href="'/modal'" @click.prevent="clickModal($event), getInfo(posts[index])">
+                    <a class="it-lnk" :href="'/modal'" @click.prevent="clickModal($event), getDetails(post.id)">
                         <img class="it-img _lz" :src="post.poster_path"/>
                         <h2 class="it-ttl">Title: {{ post.original_title }}</h2>
                         <span class="it-txt">Genre IDs: {{ post.genre_ids }}</span>
@@ -35,7 +35,7 @@
               requested: false,
               requesting: false,
               showModal:false,
-              modalContent: {html: '', info: [], href: ''},
+              modalContent: {html: '', info: {}, href: ''},
               query: '',
               posts: []
             };
@@ -83,12 +83,19 @@
 
                     this.modalContent.href = href;
 
+                    this.getDetails();
                     this.postHandler(href);
                     this.showModal = true;
                 }
             },
-            getInfo(post) {
-                this.modalContent.info = post;
+            getDetails(id) {
+                let info = {};
+                    axios
+                        .get(`https://api.themoviedb.org/3/movie/${id}?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en`)
+                        .then(details => {
+                            info = details.data;
+                            console.log(info);
+                        });                    
             }
            
         },
