@@ -1,3 +1,12 @@
+Vue.prototype.getDetails = function (component) {
+        axios
+            .get(`https://api.themoviedb.org/3/movie/${component.key}?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en`)
+            .then(details => {
+                let res = details.data;
+                component.modalContent.info = res;
+            });
+}
+
 Vue.prototype.searchPosts = function (component) {
     component.filterby = [];
     if (!component.filtered) {

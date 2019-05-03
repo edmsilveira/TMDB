@@ -25617,6 +25617,13 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* 40 */
 /***/ (function(module, exports) {
 
+Vue.prototype.getDetails = function (component) {
+    axios.get('https://api.themoviedb.org/3/movie/' + component.key + '?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en').then(function (details) {
+        var res = details.data;
+        component.modalContent.info = res;
+    });
+};
+
 Vue.prototype.searchPosts = function (component) {
     component.filterby = [];
     if (!component.filtered) {
@@ -31047,7 +31054,7 @@ var content = __webpack_require__(53);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("ef9381ba", content, false, {});
+var update = __webpack_require__(2)("4bfe93b0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -31222,7 +31229,7 @@ var content = __webpack_require__(59);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("402d10bb", content, false, {});
+var update = __webpack_require__(2)("03f56548", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -31294,6 +31301,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             requested: false,
             requesting: false,
             showModal: false,
+            key: '',
             modalContent: { html: '', info: {}, href: '' },
             query: '',
             posts: []
@@ -31336,7 +31344,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (href) render();else destroy();
         },
-        clickModal: function clickModal(event) {
+        clickModal: function clickModal(event, id) {
             if (this.modalOpen) {
                 this.postHandler(false);
                 this.showModal = false;
@@ -31345,17 +31353,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 this.modalContent.href = href;
 
-                this.getDetails();
+                this.key = id;
+
+                this.getDetails(this);
                 this.postHandler(href);
                 this.showModal = true;
             }
-        },
-        getDetails: function getDetails(id) {
-            var info = {};
-            axios.get('https://api.themoviedb.org/3/movie/' + id + '?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en').then(function (details) {
-                info = details.data;
-                console.log(info);
-            });
         }
     },
     beforeMount: function beforeMount() {
@@ -31424,7 +31427,7 @@ var render = function() {
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            _vm.clickModal($event), _vm.getDetails(post.id)
+                            return _vm.clickModal($event, post.id)
                           }
                         }
                       },
@@ -31534,7 +31537,7 @@ var content = __webpack_require__(64);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("a33a1c78", content, false, {});
+var update = __webpack_require__(2)("bd2f51de", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -31803,7 +31806,7 @@ var content = __webpack_require__(69);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("0cf9a253", content, false, {});
+var update = __webpack_require__(2)("7b884134", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
