@@ -5,13 +5,13 @@
 <template>
     <div class="content">
         <menu-component></menu-component>
-        <modal-component v-if="showModal" class="p-dtn" :html="modalContent.html" :href="modalContent.href" @close="showModal = false"></modal-component>
+        <modal-component v-if="showModal" class="p-dtn" :movie="modalContent" @close="showModal = false"></modal-component>
 
         <div class="p-orn">
             <h1 v-if="requesting">Loading...</h1>
             <div v-if="posts.length" v-masonry transition-duration="0s" item-selector=".it">
                 <div v-masonry-tile class="it" v-for="(post, index) in posts" :id="index" :key="index">
-                    <a class="it-lnk" :href="'/modal'" @click.prevent="clickModal($event,post.id)">
+                    <a class="it-lnk" :href="'/'" @click.prevent="clickMovie($event,post.id)">
                         <img class="it-img _lz" :src="post.poster_path"/>
                         <h2 class="it-ttl">Title: {{ post.original_title }}</h2>
                         <span class="it-txt">Genre IDs: {{ post.genre_ids }}</span>
@@ -19,7 +19,7 @@
                     </a>
                 </div>
             </div>
-            <h2 v-if="!posts.length">Ops! No results found for {{query }}</h2>
+            <h2 v-if="!posts.length">Ops! No results found for {{ query }}</h2>
         </div>
 
     </div>
@@ -36,8 +36,7 @@
               requesting: false,
               showModal:false,
               key: '',
-              modalContent: {html: '', info: {}, href: ''},
-              query: '',
+              modalContent: {},
               posts: []
             };
         },
@@ -51,52 +50,19 @@
                         this.getMovies(this);
                 }
             },
-            postHandler(href) {
-                let FeedComponent, body;
-
-                body = $('body');
-                FeedComponent = this;
-
-                function render() {
-                    axios
-                        .get(href)
-                        .then(result => (FeedComponent.modalContent.html = result.data));
-
-                        // Modal Active
-                        body.addClass('MD-ACT LOCK');
-                }
-
-                function destroy() {
-                    FeedComponent.modalContent.html = '';
-
-                    // Modal Active
-                    body.removeClass('MD-ACT LOCK');
-                }
-
-                if (href) render(); else destroy();
-            },
-            clickModal(event, id) {
-                if (this.modalOpen) {
-                    this.postHandler(false);
-                    this.showModal = false;
-                } else {
-                    let href = event.target.parentElement.getAttribute('href');
-
-                    this.modalContent.href = href;
+            clickMovie(event, id) {
+                let body = $('body');
 
                     this.key = id;
                     this.getDetails(this);
-
-                    this.postHandler(href);
                     this.showModal = true;
-                }
+
+                    body.addClass('MD-ACT LOCK');
             }
            
         },
         beforeMount() {
-            this.postHandler();
             this.getMovies(this);
-            this.getModal(this);
         },
         mounted() {
             this.paginate();

@@ -25620,7 +25620,9 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 Vue.prototype.getDetails = function (component) {
     axios.get('https://api.themoviedb.org/3/movie/' + component.key + '?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en').then(function (details) {
         var res = details.data;
-        component.modalContent.info = res;
+
+        res.poster_path = 'https://image.tmdb.org/t/p/w500' + res.poster_path;
+        component.modalContent = res;
     });
 };
 
@@ -25650,12 +25652,8 @@ Vue.prototype.searchPosts = function (component) {
 };
 
 Vue.prototype.getMovies = function (component) {
-    var query = window.location.search.substring(1),
-        params = new URLSearchParams(query),
-        key = params.get('q'),
-        upcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en&page=' + component.i;
+    var upcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en&page=' + component.i;
 
-    component.query = key !== null ? key : '';
     component.requesting = true;
 
     if (!component.requested) {
@@ -25683,19 +25681,6 @@ Vue.prototype.getMovies = function (component) {
         component.requesting = false;
     }
     component.revalidate();
-};
-
-Vue.prototype.getModal = function (component) {
-    var query = window.location.search.substring(1),
-        params = new URLSearchParams(query),
-        key = params.get('postHandler');
-
-    if (key !== null) {
-        component.postHandler(key);
-        component.showModal = true;
-
-        this.$router.push(key);
-    }
 };
 
 /***/ }),
@@ -31054,7 +31039,7 @@ var content = __webpack_require__(53);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("4bfe93b0", content, false, {});
+var update = __webpack_require__(2)("ef9381ba", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -31229,7 +31214,7 @@ var content = __webpack_require__(59);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("03f56548", content, false, {});
+var update = __webpack_require__(2)("402d10bb", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -31253,7 +31238,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.content {\n  display: block;\n  width: 100%;\n}\n.p-orn {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it {\n  display: block;\n  width: 500px;\n  padding: 30px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it-lnk {\n    text-decoration: none;\n    cursor: pointer;\n    display: block;\n}\n.it-ttl, .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 12px;\n}\n.it-img {\n    width: 100%;\n    height: auto;\n    display: block;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 300px;\n  z-index: 20;\n  opacity: 1;\n  visibility: visible;\n  -webkit-transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n}\n.filter.ac {\n    opacity: 1;\n    visibility: visible;\n}\n.filter input {\n    padding: 10px;\n    border: solid lightpink;\n    border-radius: 10px;\n}\n.filter input:focus {\n      outline: none;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.content {\n  display: block;\n  width: 100%;\n}\n.p-orn {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  opacity: 1;\n}\n.MD-ACT .p-orn {\n    opacity: .25;\n    -webkit-filter: blur(5px);\n            filter: blur(5px);\n}\n.it {\n  display: block;\n  width: 500px;\n  padding: 30px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it-lnk {\n    text-decoration: none;\n    cursor: pointer;\n    display: block;\n}\n.it-ttl, .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 12px;\n}\n.it-img {\n    width: 100%;\n    height: auto;\n    display: block;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 300px;\n  z-index: 20;\n  opacity: 1;\n  visibility: visible;\n  -webkit-transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n}\n.filter.ac {\n    opacity: 1;\n    visibility: visible;\n}\n.filter input {\n    padding: 10px;\n    border: solid lightpink;\n    border-radius: 10px;\n}\n.filter input:focus {\n      outline: none;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n", ""]);
 
 // exports
 
@@ -31302,8 +31287,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             requesting: false,
             showModal: false,
             key: '',
-            modalContent: { html: '', info: {}, href: '' },
-            query: '',
+            modalContent: {},
             posts: []
         };
     },
@@ -31319,52 +31303,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (!_this.requested && _this.bottomOfWindow()) _this.getMovies(_this);
             };
         },
-        postHandler: function postHandler(href) {
-            var FeedComponent = void 0,
-                body = void 0;
+        clickMovie: function clickMovie(event, id) {
+            var body = $('body');
 
-            body = $('body');
-            FeedComponent = this;
+            this.key = id;
+            this.getDetails(this);
+            this.showModal = true;
 
-            function render() {
-                axios.get(href).then(function (result) {
-                    return FeedComponent.modalContent.html = result.data;
-                });
-
-                // Modal Active
-                body.addClass('MD-ACT LOCK');
-            }
-
-            function destroy() {
-                FeedComponent.modalContent.html = '';
-
-                // Modal Active
-                body.removeClass('MD-ACT LOCK');
-            }
-
-            if (href) render();else destroy();
-        },
-        clickModal: function clickModal(event, id) {
-            if (this.modalOpen) {
-                this.postHandler(false);
-                this.showModal = false;
-            } else {
-                var href = event.target.parentElement.getAttribute('href');
-
-                this.modalContent.href = href;
-
-                this.key = id;
-
-                this.getDetails(this);
-                this.postHandler(href);
-                this.showModal = true;
-            }
+            body.addClass('MD-ACT LOCK');
         }
     },
     beforeMount: function beforeMount() {
-        this.postHandler();
         this.getMovies(this);
-        this.getModal(this);
     },
     mounted: function mounted() {
         this.paginate();
@@ -31388,7 +31338,7 @@ var render = function() {
       _vm.showModal
         ? _c("modal-component", {
             staticClass: "p-dtn",
-            attrs: { html: _vm.modalContent.html, href: _vm.modalContent.href },
+            attrs: { movie: _vm.modalContent },
             on: {
               close: function($event) {
                 _vm.showModal = false
@@ -31423,11 +31373,11 @@ var render = function() {
                       "a",
                       {
                         staticClass: "it-lnk",
-                        attrs: { href: "/modal" },
+                        attrs: { href: "/" },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.clickModal($event, post.id)
+                            return _vm.clickMovie($event, post.id)
                           }
                         }
                       },
@@ -31537,7 +31487,7 @@ var content = __webpack_require__(64);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("bd2f51de", content, false, {});
+var update = __webpack_require__(2)("a33a1c78", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -31806,7 +31756,7 @@ var content = __webpack_require__(69);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("7b884134", content, false, {});
+var update = __webpack_require__(2)("0cf9a253", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -31827,10 +31777,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(1)(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,700);", ""]);
+
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: 'Open Sans', sans-serif;\n  font-weight: 300;\n}\n.label {\n  border: solid red;\n}\nstrong {\n  font-weight: 600;\n}\n.p-dtn {\n  display: block;\n  position: fixed;\n  visibility: hidden;\n  opacity: 0;\n  top: 0;\n  width: 100vw;\n  height: 100%;\n  z-index: 10;\n  overflow-y: scroll;\n  background-color: #FFF;\n}\n.MD-ACT .p-dtn {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-mask {\n  visibility: hidden;\n  opacity: 0;\n}\n.modal-mask.popup {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n  position: fixed;\n  top: 0;\n}\n.modal-enter, .modal-modal-active {\n  opacity: 0;\n}\n.c-tc {\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n.c-tc-ttl {\n    -webkit-transition: opacity ease-in .25s;\n    transition: opacity ease-in .25s;\n    line-height: 1.09em;\n    letter-spacing: -.03em;\n    font-size: 4em;\n}\n.c-tc-ttl.f32 {\n      font-size: 2em;\n}\n.c-tc-em {\n    font-weight: 300;\n}\n.c-tc-txt {\n    -webkit-transition: opacity ease-in .25s;\n    transition: opacity ease-in .25s;\n    line-height: 1.5em;\n    font-family: 'sans-serif';\n    font-weight: 400;\n    letter-spacing: 0;\n    font-size: 1em;\n    color: lightgray;\n    padding-top: 1.25em;\n    font-size: 1em;\n}\n.c-tc-ttl, .c-tc-txt {\n    text-align: center;\n    width: 100%;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
+exports.push([module.i, "\n.p-dtn {\n  display: block;\n  position: fixed;\n  visibility: hidden;\n  opacity: 0;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  width: 50vw;\n  left: 50%;\n  height: 50%;\n  z-index: 10;\n  background-color: #90C365;\n}\n.MD-ACT .p-dtn {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-mask {\n  visibility: hidden;\n  opacity: 0;\n}\n.modal-mask.popup {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-body .it-img {\n    width: 250px;\n    margin: 0 auto;\n    display: block;\n}\n.modal-default-button {\n  float: right;\n  position: fixed;\n  top: 0;\n}\n", ""]);
 
 // exports
 
@@ -31861,20 +31811,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    html: null,
-    popup: {},
-    href: ''
-  },
   mounted: function mounted() {
-    if (this.$router.currentRoute.path !== '/where') {
-      this.$router.push(this.href);
-    }
+    var body = $('body');
   },
-  destroyed: function destroyed() {
-    this.$router.push('/home');
+
+  props: {
+    movie: {}
   }
 });
 
@@ -31892,22 +31837,27 @@ var render = function() {
       { staticClass: "modal-body" },
       [
         _vm._t("body", [
-          _vm.html
-            ? _c("div", { domProps: { innerHTML: _vm._s(_vm.html) } })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.popup
-            ? _c("div", [
-                _c("h2", { staticClass: "pin-title" }, [
-                  _vm._v(_vm._s(_vm.popup.name))
+          _vm.movie
+            ? _c("section", [
+                _c("h2", { staticClass: "it-ttl" }, [
+                  _vm._v("Title: " + _vm._s(_vm.movie.original_title))
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "pin-address" }, [
-                  _vm._v(_vm._s(_vm.popup.address))
+                _c("img", {
+                  staticClass: "it-img _lz",
+                  attrs: { src: _vm.movie.poster_path }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "it-txt" }, [
+                  _vm._v("Genre IDs: " + _vm._s(_vm.movie.genres[0].name))
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "pin-fone" }, [
-                  _vm._v(_vm._s(_vm.popup.phone))
+                _c("span", { staticClass: "it-txt" }, [
+                  _vm._v("Overview: " + _vm._s(_vm.movie.overview))
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "it-txt" }, [
+                  _vm._v("Release Date: " + _vm._s(_vm.movie.release_date))
                 ])
               ])
             : _vm._e()

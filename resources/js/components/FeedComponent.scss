@@ -16,6 +16,12 @@ body {
 .p-orn {
     display: block;
     box-sizing: border-box;
+    opacity: 1;
+    
+    .MD-ACT & {
+        opacity: .25;
+        filter: blur(5px);
+    }
 
 }
 
