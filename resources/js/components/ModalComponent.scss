@@ -1,6 +1,7 @@
 @import "../../sass/variables.scss";
 @import "../../sass/mixins.scss";
 
+$mobile: 768px;
 
 .p-dtn {
     display: block;
@@ -20,6 +21,10 @@
       visibility: visible;
       opacity: 1;
     }
+
+    @media (max-width: $mobile) {
+      width: 100%;
+  }
 }
 
 .modal {
@@ -75,6 +80,10 @@
     border: none;
     cursor: pointer;
     border-radius: 10vw;
+
+      @media (max-width: $mobile) {
+        right: 50%;
+    }
   }
 
 

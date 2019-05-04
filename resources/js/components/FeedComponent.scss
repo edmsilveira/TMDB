@@ -2,6 +2,9 @@
 @import "../../sass/mixins.scss";
 
 
+$mobile: 768px;
+
+
 body {
     margin: 0;
     padding: 0;
@@ -84,6 +87,13 @@ body {
         }
     }
 
+    @media (max-width: $mobile) {
+        width: 100%;
+    }
+    
+
 }
 
+
+    
 

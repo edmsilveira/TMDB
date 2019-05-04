@@ -1,6 +1,8 @@
 @import "../../sass/variables.scss";
 @import "../../sass/mixins.scss";
 
+$mobile: 768px;
+
 body {
     margin: 0;
     padding: 0;
@@ -71,6 +73,10 @@ body {
                     opacity: 1;
                     visibility: visible;
                 }
+            }
+
+            @media (max-width: $mobile) {
+                width: 100%;
             }
         
         }
