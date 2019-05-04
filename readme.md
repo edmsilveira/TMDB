@@ -9,7 +9,9 @@ This is a MVP of a TMDB app developed with PHP 7 + Composer + Laravel(5.7) + Vue
 ## Features
 
 Listing the upcoming movies with pagination using a simple lazy load and a masonry grid layout plugin(beta version).
+
 Show movie details on modal when clicked.
+
 Search for movie by some keyword
 
 ## Install
