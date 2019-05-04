@@ -72,14 +72,15 @@
             }
         },
         clickMovie(event, id) {
-            let body = $('body');
-
             this.key = id;
             this.getDetails(this);
             this.showModal = true;
 
             this.toggleModal();                    
         }
+    },
+    mounted() {
+        this.paginate();
     }
 
   }

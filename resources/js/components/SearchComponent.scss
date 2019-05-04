@@ -1,72 +1,24 @@
 @import "../../sass/variables.scss";
 @import "../../sass/mixins.scss";
 
-
-.search {
-    padding: 10px;
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', 'sans-serif';
 }
-
-.filter {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    width: 500px;
-    z-index: 20;
-    transform: translate3d(-50%,200%,1px);
-    transition: transform .5s ease-in-out;
-
-    .found-posts & {
-        transform: translate3d(-50%,0,1px);
-    }
-
-
-    &-input {
-        border: none;
-        width: 100%;
-        text-align: center;
-        position: relative;
-        left: 50%;
-        transform: translate3d(-50%,0,1px);
-        right: 0;
-        color: $color-black;
-        font-size: 32px;
-
-        &:placeholder {
-            color: $color-black-light-2;
-            
-        }
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-    &-submit {
-        border: none;
-        border-radius: 30px;
-        background: teal;
-        display: block;
-        margin: 20px auto;
-        width: 150px;
-        height: 50px;
-        color: #fff;
-    }
-
-    span {
-        display: block;
-        margin: 5px 0;
-        font-weight: 800;
-    }
-}
-
 
 .search {
     display: block;
     width: 100%;
+    padding: 10px 0;
 
-    &-content {
-        display: inline-block;
-        width: 100vw;
+        &-content {
+            .MD-ACT & {
+                opacity: .25;
+                filter: blur(2px);
+            }
+        }
 
         .it {
             display: block;
@@ -123,15 +75,72 @@
         
         }
     
-    }
+    
 
     &-text {
         position: absolute;
         top: 25%;
         color: $color-accent;
-
-        &.no {
-            color: red;
-        }
     }
 }
+
+
+
+.filter {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 500px;
+    z-index: 20;
+    transform: translate3d(-50%,200%,1px);
+    transition: transform .5s ease-in-out;
+
+    .found-posts & {
+        transform: translate3d(-50%,0,1px);
+    }
+
+    .MD-ACT & {
+        opacity: .25;
+        filter: blur(2px);
+    }
+
+
+    &-input {
+        border: none;
+        border-radius: 20px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        left: 50%;
+        transform: translate3d(-50%,0,1px);
+        right: 0;
+        color: $color-black;
+        font-size: 32px;
+
+        &:placeholder {
+            color: $color-black-light-2;            
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &-submit {
+        border: none;
+        border-radius: 30px;
+        background: teal;
+        display: block;
+        margin: 20px auto;
+        width: 150px;
+        height: 50px;
+        color: #fff;
+    }
+
+    span {
+        display: block;
+        margin: 5px 0;
+        font-weight: 800;
+    }
+}
+

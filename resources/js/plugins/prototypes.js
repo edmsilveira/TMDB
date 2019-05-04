@@ -17,10 +17,9 @@ Vue.prototype.getDetails = function (component) {
 }
 
 Vue.prototype.searchPosts = function (component) {
-    component.searchby = [];
     if (!component.filtered) {
         axios
-            .get(`https://api.themoviedb.org/3/search/movie?api_key=c5850ed73901b8d268d0898a8a9d8bff&page${component.j}&language=en-US&query=${component.keyword}`)
+            .get(`https://api.themoviedb.org/3/search/movie?api_key=c5850ed73901b8d268d0898a8a9d8bff&page=${component.j}&language=en-US&query=${component.keyword}`)
             .then(response => {
                 let  seek = response.data, i, t;
 

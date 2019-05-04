@@ -25636,9 +25636,8 @@ Vue.prototype.getDetails = function (component) {
 };
 
 Vue.prototype.searchPosts = function (component) {
-    component.searchby = [];
     if (!component.filtered) {
-        axios.get('https://api.themoviedb.org/3/search/movie?api_key=c5850ed73901b8d268d0898a8a9d8bff&page' + component.j + '&language=en-US&query=' + component.keyword).then(function (response) {
+        axios.get('https://api.themoviedb.org/3/search/movie?api_key=c5850ed73901b8d268d0898a8a9d8bff&page=' + component.j + '&language=en-US&query=' + component.keyword).then(function (response) {
             var seek = response.data,
                 i = void 0,
                 t = void 0;
@@ -28854,7 +28853,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.search {\n  padding: 10px;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 500px;\n  z-index: 20;\n  -webkit-transform: translate3d(-50%, 200%, 1px);\n          transform: translate3d(-50%, 200%, 1px);\n  -webkit-transition: -webkit-transform .5s ease-in-out;\n  transition: -webkit-transform .5s ease-in-out;\n  transition: transform .5s ease-in-out;\n  transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out;\n}\n.found-posts .filter {\n    -webkit-transform: translate3d(-50%, 0, 1px);\n            transform: translate3d(-50%, 0, 1px);\n}\n.filter-input {\n    border: none;\n    width: 100%;\n    text-align: center;\n    position: relative;\n    left: 50%;\n    -webkit-transform: translate3d(-50%, 0, 1px);\n            transform: translate3d(-50%, 0, 1px);\n    right: 0;\n    color: rgba(5, 0, 0, 0.9);\n    font-size: 32px;\n}\n.filter-input:placeholder {\n      color: rgba(5, 0, 0, 0.05);\n}\n.filter-input:focus {\n      outline: none;\n}\n.filter-submit {\n    border: none;\n    border-radius: 30px;\n    background: teal;\n    display: block;\n    margin: 20px auto;\n    width: 150px;\n    height: 50px;\n    color: #fff;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n.search {\n  display: block;\n  width: 100%;\n}\n.search-content {\n    display: inline-block;\n    width: 100vw;\n}\n.search-content .it {\n      display: block;\n      width: 25%;\n      -webkit-box-sizing: border-box;\n              box-sizing: border-box;\n}\n.search-content .it-inf {\n        position: relative;\n        width: 75%;\n        height: 100px;\n        top: 0;\n        z-index: 1;\n        -webkit-transform: translate3d(0%, -100%, 1px);\n                transform: translate3d(0%, -100%, 1px);\n        background-color: rgba(5, 0, 0, 0.9);\n        -webkit-box-sizing: border-box;\n                box-sizing: border-box;\n        opacity: 0;\n        visibility: hidden;\n        -webkit-transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n        transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n}\n.search-content .it-lnk {\n        position: relative;\n        text-decoration: none;\n        cursor: initial;\n        display: block;\n        width: 100%;\n}\n.search-content .it-ttl, .search-content .it-txt {\n        display: block;\n        text-align: center;\n        font-size: 16px;\n        color: #FFF;\n}\n.search-content .it-img {\n        width: 100%;\n        height: 40vh;\n        display: block;\n        cursor: pointer;\n}\n.search-content .it:hover .it-inf {\n        opacity: 1;\n        visibility: visible;\n}\n.search-text {\n    position: absolute;\n    top: 25%;\n    color: #0663B9;\n}\n.search-text.no {\n      color: red;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-family: 'Roboto', 'sans-serif';\n}\n.search {\n  display: block;\n  width: 100%;\n  padding: 10px 0;\n}\n.MD-ACT .search-content {\n    opacity: .25;\n    -webkit-filter: blur(2px);\n            filter: blur(2px);\n}\n.search .it {\n    display: block;\n    width: 25%;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n}\n.search .it-inf {\n      position: relative;\n      width: 75%;\n      height: 100px;\n      top: 0;\n      z-index: 1;\n      -webkit-transform: translate3d(0%, -100%, 1px);\n              transform: translate3d(0%, -100%, 1px);\n      background-color: rgba(5, 0, 0, 0.9);\n      -webkit-box-sizing: border-box;\n              box-sizing: border-box;\n      opacity: 0;\n      visibility: hidden;\n      -webkit-transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n      transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n}\n.search .it-lnk {\n      position: relative;\n      text-decoration: none;\n      cursor: initial;\n      display: block;\n      width: 100%;\n}\n.search .it-ttl, .search .it-txt {\n      display: block;\n      text-align: center;\n      font-size: 16px;\n      color: #FFF;\n}\n.search .it-img {\n      width: 100%;\n      height: 40vh;\n      display: block;\n      cursor: pointer;\n}\n.search .it:hover .it-inf {\n      opacity: 1;\n      visibility: visible;\n}\n.search-text {\n    position: absolute;\n    top: 25%;\n    color: #0663B9;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 500px;\n  z-index: 20;\n  -webkit-transform: translate3d(-50%, 200%, 1px);\n          transform: translate3d(-50%, 200%, 1px);\n  -webkit-transition: -webkit-transform .5s ease-in-out;\n  transition: -webkit-transform .5s ease-in-out;\n  transition: transform .5s ease-in-out;\n  transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out;\n}\n.found-posts .filter {\n    -webkit-transform: translate3d(-50%, 0, 1px);\n            transform: translate3d(-50%, 0, 1px);\n}\n.MD-ACT .filter {\n    opacity: .25;\n    -webkit-filter: blur(2px);\n            filter: blur(2px);\n}\n.filter-input {\n    border: none;\n    border-radius: 20px;\n    width: 100%;\n    text-align: center;\n    position: relative;\n    left: 50%;\n    -webkit-transform: translate3d(-50%, 0, 1px);\n            transform: translate3d(-50%, 0, 1px);\n    right: 0;\n    color: rgba(5, 0, 0, 0.9);\n    font-size: 32px;\n}\n.filter-input:placeholder {\n      color: rgba(5, 0, 0, 0.05);\n}\n.filter-input:focus {\n      outline: none;\n}\n.filter-submit {\n    border: none;\n    border-radius: 30px;\n    background: teal;\n    display: block;\n    margin: 20px auto;\n    width: 150px;\n    height: 50px;\n    color: #fff;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n", ""]);
 
 // exports
 
@@ -28941,16 +28940,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         clickMovie: function clickMovie(event, id) {
-            var body = $('body');
-
             this.key = id;
             this.getDetails(this);
             this.showModal = true;
 
             this.toggleModal();
         }
+    },
+    mounted: function mounted() {
+        this.paginate();
     }
-
 });
 
 /***/ }),
