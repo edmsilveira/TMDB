@@ -28561,7 +28561,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.content {\n  display: block;\n  width: 100%;\n}\n.p-orn {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  opacity: 1;\n}\n.MD-ACT .p-orn {\n    opacity: .25;\n    -webkit-filter: blur(5px);\n            filter: blur(5px);\n}\n.it {\n  display: block;\n  width: 500px;\n  padding: 30px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it-lnk {\n    text-decoration: none;\n    cursor: pointer;\n    display: block;\n}\n.it-ttl, .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 12px;\n}\n.it-img {\n    width: 100%;\n    height: auto;\n    display: block;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 300px;\n  z-index: 20;\n  opacity: 1;\n  visibility: visible;\n  -webkit-transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n}\n.filter.ac {\n    opacity: 1;\n    visibility: visible;\n}\n.filter input {\n    padding: 10px;\n    border: solid lightpink;\n    border-radius: 10px;\n}\n.filter input:focus {\n      outline: none;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-family: 'Roboto', 'sans-serif';\n}\n.content {\n  display: block;\n  width: 100%;\n}\n.p-orn {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  opacity: 1;\n  -webkit-transition: opacity .25s ease-in-out, -webkit-filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, -webkit-filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, filter .25s ease-in-out, -webkit-filter .25s ease-in-out;\n}\n.MD-ACT .p-orn {\n    opacity: .25;\n    -webkit-filter: blur(2px);\n            filter: blur(2px);\n}\n.it {\n  display: block;\n  width: 500px;\n  padding: 30px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it-lnk {\n    text-decoration: none;\n    cursor: pointer;\n    display: block;\n}\n.it-ttl, .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 12px;\n}\n.it-img {\n    width: 100%;\n    height: auto;\n    display: block;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 300px;\n  z-index: 20;\n  opacity: 1;\n  visibility: visible;\n  -webkit-transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n}\n.filter.ac {\n    opacity: 1;\n    visibility: visible;\n}\n.filter input {\n    padding: 10px;\n    border: solid lightpink;\n    border-radius: 10px;\n}\n.filter input:focus {\n      outline: none;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n", ""]);
 
 // exports
 
@@ -28572,7 +28572,6 @@ exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-si
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -28626,6 +28625,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (!_this.requested && _this.bottomOfWindow()) _this.getMovies(_this);
             };
         },
+        toggleModal: function toggleModal() {
+            var body = $('body');
+
+            if (this.showModal) {
+                body.addClass('MD-ACT LOCK');
+            } else {
+                body.removeClass('MD-ACT LOCK');
+            }
+        },
         clickMovie: function clickMovie(event, id) {
             var body = $('body');
 
@@ -28633,7 +28641,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.getDetails(this);
             this.showModal = true;
 
-            body.addClass('MD-ACT LOCK');
+            this.toggleModal();
         }
     },
     beforeMount: function beforeMount() {
@@ -28665,14 +28673,13 @@ var render = function() {
             on: {
               close: function($event) {
                 _vm.showModal = false
+                _vm.toggleModal()
               }
             }
           })
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "p-orn" }, [
-        _vm.requesting ? _c("h1", [_vm._v("Loading...")]) : _vm._e(),
-        _vm._v(" "),
         _vm.posts.length
           ? _c(
               "div",
@@ -28730,9 +28737,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        !_vm.posts.length
-          ? _c("h2", [_vm._v("Ops! No results found for " + _vm._s(_vm.query))])
-          : _vm._e()
+        !_vm.posts.length ? _c("h2", [_vm._v("Loading...")]) : _vm._e()
       ])
     ],
     1
@@ -29103,7 +29108,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.p-dtn {\n  display: block;\n  position: fixed;\n  visibility: hidden;\n  opacity: 0;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  width: 50vw;\n  left: 50%;\n  height: 50%;\n  z-index: 10;\n  background-color: #90C365;\n}\n.MD-ACT .p-dtn {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-mask {\n  visibility: hidden;\n  opacity: 0;\n}\n.modal-mask.popup {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-body .it-img {\n    width: 250px;\n    margin: 0 auto;\n    display: block;\n}\n.modal-default-button {\n  float: right;\n  position: fixed;\n  top: 0;\n}\n", ""]);
+exports.push([module.i, "\n.p-dtn {\n  display: block;\n  position: fixed;\n  visibility: hidden;\n  opacity: 0;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  width: 50vw;\n  left: 50%;\n  height: 75vh;\n  z-index: 10;\n  border-radius: 5vw;\n  background-color: #0663B9;\n}\n.MD-ACT .p-dtn {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-mask {\n  visibility: hidden;\n  opacity: 0;\n}\n.modal-mask.popup {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-body {\n  padding-top: 50px;\n}\n.modal-body .it-img {\n    width: 250px;\n    margin: 0 auto;\n    padding: 20px 0;\n    display: block;\n}\n.modal-body .it-ttl, .modal-body .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 16px;\n    letter-spacing: .1em;\n}\n.modal-body .it-ttl {\n    font-size: 32px;\n}\n.modal-default-button {\n  right: 0;\n  position: fixed;\n  top: 0;\n  background-color: #e5e5e5;\n  width: 50px;\n  height: 40px;\n  font-size: 32px;\n  -webkit-transform: translate(50%, -50%);\n          transform: translate(50%, -50%);\n  border: none;\n  cursor: pointer;\n  border-radius: 10vw;\n}\n", ""]);
 
 // exports
 
@@ -29199,7 +29204,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v(" Fechar ")]
+      [_vm._v(" X ")]
     )
   ])
 }

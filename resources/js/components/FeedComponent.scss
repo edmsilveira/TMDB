@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', 'sans-serif';
 }
 
 .content {
@@ -17,10 +18,12 @@ body {
     display: block;
     box-sizing: border-box;
     opacity: 1;
-    
+    transition: opacity .25s ease-in-out, filter .25s ease-in-out;
+
+
     .MD-ACT & {
         opacity: .25;
-        filter: blur(5px);
+        filter: blur(2px);
     }
 
 }

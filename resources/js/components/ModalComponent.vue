@@ -15,7 +15,7 @@
               </section>
             </slot>
           </div>
-          <button class="modal-default-button" @click="$emit('close');"> Fechar </button>
+          <button class="modal-default-button" @click="$emit('close');"> X </button>
     </div>
 </template>
 
@@ -23,6 +23,8 @@
   export default {
     mounted() {
       let body = $('body');
+
+      
     },
     props: {
         movie: {}

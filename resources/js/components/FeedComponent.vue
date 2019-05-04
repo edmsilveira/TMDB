@@ -5,10 +5,9 @@
 <template>
     <div class="content">
         <menu-component></menu-component>
-        <modal-component v-if="showModal" class="p-dtn" :movie="modalContent" @close="showModal = false"></modal-component>
+        <modal-component v-if="showModal" class="p-dtn" :movie="modalContent" @close="showModal = false;toggleModal();"></modal-component>
 
-        <div class="p-orn">
-            <h1 v-if="requesting">Loading...</h1>
+        <div class="p-orn">       
             <div v-if="posts.length" v-masonry transition-duration="0s" item-selector=".it">
                 <div v-masonry-tile class="it" v-for="(post, index) in posts" :id="index" :key="index">
                     <a class="it-lnk" :href="'/'" @click.prevent="clickMovie($event,post.id)">
@@ -19,7 +18,7 @@
                     </a>
                 </div>
             </div>
-            <h2 v-if="!posts.length">Ops! No results found for {{ query }}</h2>
+            <h2 v-if="!posts.length">Loading...</h2>
         </div>
 
     </div>
@@ -34,7 +33,7 @@
               z: 0,
               requested: false,
               requesting: false,
-              showModal:false,
+              showModal: false,
               key: '',
               modalContent: {},
               posts: []
@@ -50,14 +49,23 @@
                         this.getMovies(this);
                 }
             },
+            toggleModal() {
+                let body = $('body');
+
+                if(this.showModal){
+                    body.addClass('MD-ACT LOCK');
+                } else {
+                    body.removeClass('MD-ACT LOCK');
+                }
+            },
             clickMovie(event, id) {
                 let body = $('body');
 
-                    this.key = id;
-                    this.getDetails(this);
-                    this.showModal = true;
+                this.key = id;
+                this.getDetails(this);
+                this.showModal = true;
 
-                    body.addClass('MD-ACT LOCK');
+                this.toggleModal();                    
             }
            
         },
