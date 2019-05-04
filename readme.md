@@ -20,6 +20,8 @@ Breakpoint for mobile at 768px resolution
 
 Some grid bugs may happen with masonry plugin in some breakpoints.
 Modal system is 75% done. May occur some scroll on feed while modal movie is open.
+On movie feed list, genres showing their ids only.
+
 
 ## Install
 
