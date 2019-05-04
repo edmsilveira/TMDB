@@ -11,7 +11,7 @@
     transform: translate(-50%,-50%);
     width: 50vw;
     left: 50%;
-    height: 75vh;
+    height: auto;
     z-index: 10;
     border-radius: 5vw;
     background-color:$color-accent;
@@ -35,10 +35,9 @@
   }
 
   &-body {
-    padding-top: 50px;
 
     &-wr {
-      padding: 0 50px;
+      padding: 30px;
     }
 
     .it {

@@ -31248,7 +31248,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-family: 'Roboto', 'sans-serif';\n}\n.content {\n  display: block;\n  width: 100%;\n}\n.movie-list {\n  margin: 10px;\n}\n.p-orn {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  opacity: 1;\n  -webkit-transition: opacity .25s ease-in-out, -webkit-filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, -webkit-filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, filter .25s ease-in-out, -webkit-filter .25s ease-in-out;\n}\n.MD-ACT .p-orn {\n    opacity: .25;\n    -webkit-filter: blur(2px);\n            filter: blur(2px);\n}\n.it {\n  display: block;\n  width: 25%;\n  padding: 30px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it-inf {\n    position: relative;\n    width: 75%;\n    height: 100px;\n    top: 0;\n    z-index: 1;\n    -webkit-transform: translate3d(0%, -100%, 1px);\n            transform: translate3d(0%, -100%, 1px);\n    background-color: rgba(5, 0, 0, 0.9);\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    opacity: 0;\n    visibility: hidden;\n    -webkit-transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n    transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n}\n.it-lnk {\n    position: relative;\n    text-decoration: none;\n    cursor: initial;\n    display: block;\n    width: 100%;\n}\n.it-ttl, .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 16px;\n    color: #FFF;\n}\n.it-img {\n    width: 100%;\n    height: 25vh;\n    display: block;\n    cursor: pointer;\n}\n.it:hover .it-inf {\n    opacity: 1;\n    visibility: visible;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-family: 'Roboto', 'sans-serif';\n}\n.content {\n  display: block;\n  width: 100%;\n}\n.movie-list {\n  margin: 10px;\n}\n.p-orn {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  opacity: 1;\n  -webkit-transition: opacity .25s ease-in-out, -webkit-filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, -webkit-filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, filter .25s ease-in-out, -webkit-filter .25s ease-in-out;\n}\n.MD-ACT .p-orn {\n    opacity: .25;\n    -webkit-filter: blur(2px);\n            filter: blur(2px);\n}\n.it {\n  display: block;\n  width: 25%;\n  padding: 10px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it-inf {\n    position: relative;\n    width: 75%;\n    height: 100px;\n    top: 0;\n    z-index: 1;\n    -webkit-transform: translate3d(0%, -100%, 1px);\n            transform: translate3d(0%, -100%, 1px);\n    background-color: rgba(5, 0, 0, 0.9);\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    opacity: 0;\n    visibility: hidden;\n    -webkit-transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n    transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n}\n.it-lnk {\n    position: relative;\n    text-decoration: none;\n    cursor: initial;\n    display: block;\n    width: 100%;\n}\n.it-ttl, .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 16px;\n    color: #FFF;\n}\n.it-img {\n    width: 100%;\n    height: 40vh;\n    display: block;\n    cursor: pointer;\n}\n.it:hover .it-inf {\n    opacity: 1;\n    visibility: visible;\n}\n", ""]);
 
 // exports
 
@@ -31531,7 +31531,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 300px;\n  z-index: 20;\n  opacity: 1;\n  visibility: visible;\n  -webkit-transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n}\n.filter.ac {\n    opacity: 1;\n    visibility: visible;\n}\n.filter input {\n    padding: 10px;\n    border: solid lightpink;\n    border-radius: 10px;\n}\n.filter input:focus {\n      outline: none;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n.search {\n  display: block;\n  width: 100%;\n}\n.search-content {\n    display: inline-block;\n    width: 100vw;\n}\n.search-content .it {\n      display: block;\n      width: 25%;\n      -webkit-box-sizing: border-box;\n              box-sizing: border-box;\n}\n.search-content .it-lnk {\n        text-decoration: none;\n        cursor: initial;\n        display: block;\n}\n.search-content .it-ttl {\n        display: block;\n        text-align: center;\n        font-size: 12px;\n}\n.search-content .it-img {\n        width: 50%;\n        height: 25vh;\n        display: block;\n        cursor: pointer;\n}\n.search-text {\n    position: absolute;\n    top: 25%;\n    color: #0663B9;\n}\n.search-text.no {\n      color: red;\n}\n", ""]);
+exports.push([module.i, "\n.search {\n  padding: 10px;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 500px;\n  z-index: 20;\n  -webkit-transform: translate3d(-50%, 200%, 1px);\n          transform: translate3d(-50%, 200%, 1px);\n  -webkit-transition: -webkit-transform .5s ease-in-out;\n  transition: -webkit-transform .5s ease-in-out;\n  transition: transform .5s ease-in-out;\n  transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out;\n}\n.found-posts .filter {\n    -webkit-transform: translate3d(-50%, 0, 1px);\n            transform: translate3d(-50%, 0, 1px);\n}\n.filter-input {\n    border: none;\n    width: 100%;\n    text-align: center;\n    position: relative;\n    left: 50%;\n    -webkit-transform: translate3d(-50%, 0, 1px);\n            transform: translate3d(-50%, 0, 1px);\n    right: 0;\n    color: rgba(5, 0, 0, 0.9);\n    font-size: 32px;\n}\n.filter-input:placeholder {\n      color: rgba(5, 0, 0, 0.05);\n}\n.filter-input:focus {\n      outline: none;\n}\n.filter-submit {\n    border: none;\n    border-radius: 30px;\n    background: teal;\n    display: block;\n    margin: 20px auto;\n    width: 150px;\n    height: 50px;\n    color: #fff;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n.search {\n  display: block;\n  width: 100%;\n}\n.search-content {\n    display: inline-block;\n    width: 100vw;\n}\n.search-content .it {\n      display: block;\n      width: 25%;\n      -webkit-box-sizing: border-box;\n              box-sizing: border-box;\n}\n.search-content .it-inf {\n        position: relative;\n        width: 75%;\n        height: 100px;\n        top: 0;\n        z-index: 1;\n        -webkit-transform: translate3d(0%, -100%, 1px);\n                transform: translate3d(0%, -100%, 1px);\n        background-color: rgba(5, 0, 0, 0.9);\n        -webkit-box-sizing: border-box;\n                box-sizing: border-box;\n        opacity: 0;\n        visibility: hidden;\n        -webkit-transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n        transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n}\n.search-content .it-lnk {\n        position: relative;\n        text-decoration: none;\n        cursor: initial;\n        display: block;\n        width: 100%;\n}\n.search-content .it-ttl, .search-content .it-txt {\n        display: block;\n        text-align: center;\n        font-size: 16px;\n        color: #FFF;\n}\n.search-content .it-img {\n        width: 100%;\n        height: 40vh;\n        display: block;\n        cursor: pointer;\n}\n.search-content .it:hover .it-inf {\n        opacity: 1;\n        visibility: visible;\n}\n.search-text {\n    position: absolute;\n    top: 25%;\n    color: #0663B9;\n}\n.search-text.no {\n      color: red;\n}\n", ""]);
 
 // exports
 
@@ -31542,7 +31542,6 @@ exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-si
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -31597,6 +31596,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
         },
         search: function search() {
+            var search = $('.search');
+
+            if (this.keyword === '') {
+                search.removeClass('found-posts');
+            } else {
+                search.addClass('found-posts');
+            }
+
             this.filtered = false;
             this.searchPosts(this);
         },
@@ -31660,6 +31667,7 @@ var render = function() {
               expression: "keyword"
             }
           ],
+          staticClass: "filter-input",
           attrs: { type: "text", placeholder: "Movie name .." },
           domProps: { value: _vm.keyword },
           on: {
@@ -31671,10 +31679,6 @@ var render = function() {
             }
           }
         }),
-        _vm._v(" "),
-        _vm.searchby.length
-          ? _c("span", [_vm._v(_vm._s(_vm.searchby.length) + " posts found")])
-          : _vm._e(),
         _vm._v(" "),
         _c(
           "button",
@@ -31691,13 +31695,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      !_vm.keyword && _vm.searchby.length <= 0
-        ? _c("h2", { staticClass: "search-text" }, [
-            _vm._v("Search for any movie!")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.keyword && _vm.searchby.length
+      _vm.searchby.length
         ? _c(
             "div",
             {
@@ -31733,30 +31731,28 @@ var render = function() {
                       _c("img", {
                         staticClass: "it-img _lz",
                         attrs: { src: movie.poster_path }
-                      }),
-                      _vm._v(" "),
-                      _c("h2", { staticClass: "it-ttl" }, [
-                        _vm._v("Title: " + _vm._s(movie.original_title))
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "it-txt" }, [
-                        _vm._v("Genre IDs: " + _vm._s(movie.genre_ids))
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "it-txt" }, [
-                        _vm._v("Release Date: " + _vm._s(movie.release_date))
-                      ])
+                      })
                     ]
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "it-inf" }, [
+                    _c("h2", { staticClass: "it-ttl" }, [
+                      _vm._v("Title: " + _vm._s(movie.original_title))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "it-txt" }, [
+                      _vm._v("Genre IDs: " + _vm._s(movie.genre_ids))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "it-txt" }, [
+                      _vm._v("Release Date: " + _vm._s(movie.release_date))
+                    ])
+                  ])
                 ]
               )
             }),
             0
           )
-        : _vm.keyword && !_vm.searchby.length
-        ? _c("h2", { staticClass: "search-text no" }, [
-            _vm._v("Movie Not Found!")
-          ])
         : _vm._e()
     ],
     1
@@ -31858,7 +31854,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.p-dtn {\n  display: block;\n  position: fixed;\n  visibility: hidden;\n  opacity: 0;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  width: 50vw;\n  left: 50%;\n  height: 75vh;\n  z-index: 10;\n  border-radius: 5vw;\n  background-color: #0663B9;\n}\n.MD-ACT .p-dtn {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-mask {\n  visibility: hidden;\n  opacity: 0;\n}\n.modal-mask.popup {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-body {\n  padding-top: 50px;\n}\n.modal-body-wr {\n    padding: 0 50px;\n}\n.modal-body .it-img {\n    width: 250px;\n    margin: 0 auto;\n    padding: 20px 0;\n    display: block;\n}\n.modal-body .it-ttl, .modal-body .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 16px;\n    letter-spacing: .1em;\n}\n.modal-body .it-ttl {\n    font-size: 32px;\n}\n.modal-default-button {\n  right: 0;\n  position: fixed;\n  top: 0;\n  background-color: #e5e5e5;\n  width: 50px;\n  height: 40px;\n  font-size: 32px;\n  -webkit-transform: translate(50%, -50%);\n          transform: translate(50%, -50%);\n  border: none;\n  cursor: pointer;\n  border-radius: 10vw;\n}\n", ""]);
+exports.push([module.i, "\n.p-dtn {\n  display: block;\n  position: fixed;\n  visibility: hidden;\n  opacity: 0;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  width: 50vw;\n  left: 50%;\n  height: auto;\n  z-index: 10;\n  border-radius: 5vw;\n  background-color: #0663B9;\n}\n.MD-ACT .p-dtn {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-mask {\n  visibility: hidden;\n  opacity: 0;\n}\n.modal-mask.popup {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-body-wr {\n  padding: 30px;\n}\n.modal-body .it-img {\n  width: 250px;\n  margin: 0 auto;\n  padding: 20px 0;\n  display: block;\n}\n.modal-body .it-ttl, .modal-body .it-txt {\n  display: block;\n  text-align: center;\n  font-size: 16px;\n  letter-spacing: .1em;\n}\n.modal-body .it-ttl {\n  font-size: 32px;\n}\n.modal-default-button {\n  right: 0;\n  position: fixed;\n  top: 0;\n  background-color: #e5e5e5;\n  width: 50px;\n  height: 40px;\n  font-size: 32px;\n  -webkit-transform: translate(50%, -50%);\n          transform: translate(50%, -50%);\n  border: none;\n  cursor: pointer;\n  border-radius: 10vw;\n}\n", ""]);
 
 // exports
 

@@ -8,22 +8,21 @@
         <modal-component v-if="showModal" class="p-dtn" :movie="modalContent" @close="showModal = false;toggleModal();"></modal-component>
 
         <div class="filter">
-                <input type="text" v-model="keyword" placeholder="Movie name .."/>
-                <span v-if="searchby.length">{{searchby.length}} posts found</span>
+                <input class="filter-input" type="text" v-model="keyword" placeholder="Movie name .."/>
                 <button class="filter-submit" @click.prevent="search()"> Search </button>
         </div>
-        <h2 v-if="!keyword && searchby.length <= 0" class="search-text">Search for any movie!</h2>
-        <div v-if="keyword && searchby.length" class="search-content" v-masonry transition-duration="0s" item-selector=".it">
+        <div v-if="searchby.length" class="search-content" v-masonry transition-duration="0s" item-selector=".it">
             <div v-masonry-tile class="it" v-for="(movie, index) in searchby" :id="index" :key="index">
                     <a class="it-lnk" :href="'/'" @click.prevent="clickMovie($event, movie.id)">
                         <img class="it-img _lz" :src="movie.poster_path"/>
+                    </a>
+                    <div class="it-inf">
                         <h2 class="it-ttl">Title: {{ movie.original_title }}</h2>
                         <span class="it-txt">Genre IDs: {{ movie.genre_ids }}</span>
                         <span class="it-txt">Release Date: {{ movie.release_date }}</span>
-                    </a>
-                </div>
+                    </div>
+            </div>
         </div>
-        <h2 v-else-if="keyword && !searchby.length" class="search-text no">Movie Not Found!</h2>
     </section>
 </template>
 
@@ -51,6 +50,14 @@
             }
         },
          search() {
+            let search = $('.search');
+
+            if(this.keyword === '') {
+                search.removeClass('found-posts');    
+            } else {
+                search.addClass('found-posts');
+            }
+
             this.filtered = false;
             this.searchPosts(this);
         },
