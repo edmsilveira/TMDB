@@ -1,10 +1,10 @@
 <p align="center"><img src="https://kobe.io/wp-content/uploads/2018/07/favicon-1.png"></p>
 
-<p align="center">TMDB Upcoming List</p>
+<p align="center">TMDB Upcoming List Beta Version</p>
 
 ## About the app
 
-This is a MVP of a TMDB app developed with PHP 7 + Composer + Laravel(5.7) + VueJS frameworks and node.js(8.11.3) as task runner.
+This is a MVP of a TMDB app developed with PHP 7 + Composer + Laravel(5.7) + VueJS frameworks, using node.js(8.11.3) as task runner and axios as XMLHttpRequest api.
 
 ## Features
 
@@ -12,11 +12,16 @@ Listing the upcoming movies with pagination using a simple lazy load and a mason
 
 Show movie details on modal when clicked.
 
-Search for movie by some keyword
+Search for movie by some keyword with pagination
+
+## Bugs
+
+Some grid bugs may happen with masonry plugin in some breakpoints.
+Modal system is 75% done. May occur some scroll on feed while modal movie is open.
 
 ## Install
 
-Assuming that you already have installed node.js, php 7 then open your terminal on your cloned project folder and follow the instructions below:
+Assuming that you already have installed node.js and php 7, then open your terminal on your project folder and follow the instructions below:
 
 Step 1: Install Composer on your system if you haven't installed yet.
 <a href="https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos" target="_blank" > Follow this instructions</a>
@@ -37,7 +42,7 @@ Step 4: Build the project
 
 Type "npm run dev"
 
-Step 5: Run local serve composer
+Step 5: Run local server composer
 
 Type "php artisan serve"
 
