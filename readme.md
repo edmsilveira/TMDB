@@ -14,6 +14,8 @@ Show movie details on modal when clicked.
 
 Search for movie by some keyword with pagination
 
+Breakpoint for mobile at 768px resolution
+
 ## Bugs
 
 Some grid bugs may happen with masonry plugin in some breakpoints.
