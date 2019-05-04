@@ -15,30 +15,16 @@ require('./util');
 
 import { Lazyload } from './mixins'
 import {VueMasonryPlugin} from 'vue-masonry'
-import VueRouter from 'vue-router'
+
 
 Vue.use(VueMasonryPlugin);
-Vue.use(VueRouter);
 
 Vue.component('menu-component', require('./components/MenuComponent.vue'));
 Vue.component('feed-component', require('./components/FeedComponent.vue'));
 Vue.component('search-component', require('./components/SearchComponent.vue'));
 Vue.component('modal-component', require('./components/ModalComponent.vue'));
 
-// Routes
 
-const routes = [
-    {path: '/', component: Vue.component('feed-component')},
-    {path: '/home', component: Vue.component('feed-component')},
-    {path: '/search', component: Vue.component('search-component')},
-    {path: '/modal', component: Vue.component('modal-component')},
-    
-]
-
-const router = new VueRouter({
-    mode: 'history',
-    routes
-})
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.cmponent(key.split('/').pop().split('.')[0], files(key)))
@@ -51,7 +37,6 @@ const router = new VueRouter({
 
 
 var feed = new Vue({
-    mixins: [Lazyload],
-    router
+    mixins: [Lazyload]
 }).$mount('#feed');
 

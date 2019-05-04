@@ -5,21 +5,22 @@
 <template>
     <div class="content">
         <menu-component></menu-component>
-        <modal-component v-if="showModal" class="p-dtn" :html="modalContent.html" :href="modalContent.href" @close="showModal = false"></modal-component>
+        <modal-component v-if="showModal" class="p-dtn" :movie="modalContent" @close="showModal = false;toggleModal();"></modal-component>
 
-        <div class="p-orn">
-            <h1 v-if="requesting">Loading...</h1>
-            <div v-if="posts.length" v-masonry transition-duration="0s" item-selector=".it">
+        <div class="p-orn">       
+            <div v-if="posts.length" v-masonry transition-duration="0s" item-selector=".it" class="movie-list">
                 <div v-masonry-tile class="it" v-for="(post, index) in posts" :id="index" :key="index">
-                    <a class="it-lnk" :href="'/modal'" @click.prevent="clickModal($event), getDetails(post.id)">
+                    <a class="it-lnk" :href="'/'" @click.prevent="clickMovie($event,post.id)">
                         <img class="it-img _lz" :src="post.poster_path"/>
+                    </a>
+                    <div class="it-inf"> 
                         <h2 class="it-ttl">Title: {{ post.original_title }}</h2>
                         <span class="it-txt">Genre IDs: {{ post.genre_ids }}</span>
                         <span class="it-txt">Release Date: {{ post.release_date }}</span>
-                    </a>
+                    </div>
                 </div>
             </div>
-            <h2 v-if="!posts.length">Ops! No results found for {{query }}</h2>
+            <h2 v-if="!posts.length">Loading...</h2>
         </div>
 
     </div>
@@ -30,13 +31,12 @@
         data () {
             return {
               i: 1,
-              j: 1,
               z: 0,
               requested: false,
               requesting: false,
-              showModal:false,
-              modalContent: {html: '', info: {}, href: ''},
-              query: '',
+              showModal: false,
+              key: '',
+              modalContent: {},
               posts: []
             };
         },
@@ -50,59 +50,29 @@
                         this.getMovies(this);
                 }
             },
-            postHandler(href) {
-                let FeedComponent, body;
+            toggleModal() {
+                let body = $('body');
 
-                body = $('body');
-                FeedComponent = this;
-
-                function render() {
-                    axios
-                        .get(href)
-                        .then(result => (FeedComponent.modalContent.html = result.data));
-
-                        // Modal Active
-                        body.addClass('MD-ACT LOCK');
-                }
-
-                function destroy() {
-                    FeedComponent.modalContent.html = '';
-
-                    // Modal Active
-                    body.removeClass('MD-ACT LOCK');
-                }
-
-                if (href) render(); else destroy();
-            },
-            clickModal(event) {
-                if (this.modalOpen) {
-                    this.postHandler(false);
-                    this.showModal = false;
+                if(this.showModal){
+                    body.addClass('MD-ACT LOCK');
                 } else {
-                    let href = event.target.parentElement.getAttribute('href');
-
-                    this.modalContent.href = href;
-
-                    this.getDetails();
-                    this.postHandler(href);
-                    this.showModal = true;
+                    body.removeClass('MD-ACT LOCK');
+                    this.modalContent = '';
                 }
             },
-            getDetails(id) {
-                let info = {};
-                    axios
-                        .get(`https://api.themoviedb.org/3/movie/${id}?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en`)
-                        .then(details => {
-                            info = details.data;
-                            console.log(info);
-                        });                    
+            clickMovie(event, id) {
+                let body = $('body');
+
+                this.key = id;
+                this.getDetails(this);
+                this.showModal = true;
+
+                this.toggleModal();                    
             }
            
         },
         beforeMount() {
-            this.postHandler();
             this.getMovies(this);
-            this.getModal(this);
         },
         mounted() {
             this.paginate();

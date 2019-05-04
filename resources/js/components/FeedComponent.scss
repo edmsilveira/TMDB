@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', 'sans-serif';
 }
 
 .content {
@@ -13,68 +14,76 @@ body {
     width: 100%;
 }
 
+.movie-list {
+    margin: 10px;
+}
+
 .p-orn {
     display: block;
     box-sizing: border-box;
+    opacity: 1;
+    transition: opacity .25s ease-in-out, filter .25s ease-in-out;
+
+
+    .MD-ACT & {
+        opacity: .25;
+        filter: blur(2px);
+    }
 
 }
 
 .it {
     display: block;
-    width: 500px;
+    width: 25%;
     padding: 30px;
     box-sizing: border-box;
 
+    &-inf{
+        position: relative;
+        width: 75%;
+        height: 100px;
+        top: 0;
+        z-index: 1;
+        transform: translate3d(0%,-100%,1px);
+        background-color: $color-black;
+        box-sizing: border-box;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .125s ease-in-out, visibility .125s ease-in-out;
+
+    }
+
     &-lnk {
+        position: relative;
         text-decoration: none;
-        cursor: pointer;
+        cursor: initial;
         display: block;
+        width: 100%;
     }
 
     &-ttl,
     &-txt {
         display: block;
         text-align: center;
-        font-size: 12px;
+        font-size: 16px;
+        color: $color-white;
     }
 
     &-img {
         width: 100%;
-        height: auto;
+        height: 25vh;
         display: block;
+        cursor: pointer;
     }
+    
+    &:hover {
 
-}
-
-.filter {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    width: 300px;
-    z-index: 20;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
-
-    &.ac {
-        opacity: 1;
-        visibility: visible
-    }
-
-    input {
-        padding: 10px;
-        border: solid lightpink;
-        border-radius: 10px;
-
-        &:focus {
-            outline: none;
+        .it-inf {
+            opacity: 1;
+            visibility: visible;
         }
     }
 
-    span {
-        display: block;
-        margin: 5px 0;
-        font-weight: 800;
-    }
 }
+
 

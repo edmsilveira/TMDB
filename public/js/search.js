@@ -25617,22 +25617,41 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* 40 */
 /***/ (function(module, exports) {
 
+Vue.prototype.getDetails = function (component) {
+    axios.get('https://api.themoviedb.org/3/movie/' + component.key + '?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en').then(function (details) {
+        var res = details.data,
+            i = void 0,
+            t = void 0;
+
+        t = res.genres.length;
+        res.genre = '';
+
+        for (i = 0; i < t; i++) {
+            res.genre += res.genres[i].name + ' ';
+        }
+
+        res.poster_path = 'https://image.tmdb.org/t/p/w500' + res.poster_path;
+        component.modalContent = res;
+    });
+};
+
 Vue.prototype.searchPosts = function (component) {
-    component.filterby = [];
+    component.searchby = [];
     if (!component.filtered) {
-        axios.get('./posts?q=' + component.keyword).then(function (response) {
+        axios.get('https://api.themoviedb.org/3/search/movie?api_key=c5850ed73901b8d268d0898a8a9d8bff&page' + component.j + '&language=en-US&query=' + component.keyword).then(function (response) {
             var seek = response.data,
                 i = void 0,
                 t = void 0;
 
-            t = seek.data.length;
+            t = seek.results.length;
 
-            if (seek.data.length === 0) {
+            if (seek.results.length === 0) {
                 component.filtered = true;
             }
 
             for (i = 0; i < t; i++) {
-                component.filterby.push(seek.data[i]);
+                seek.results[i].poster_path = 'https://image.tmdb.org/t/p/w500' + seek.results[i].poster_path;
+                component.searchby.push(seek.results[i]);
             }
 
             component.j++;
@@ -25643,12 +25662,8 @@ Vue.prototype.searchPosts = function (component) {
 };
 
 Vue.prototype.getMovies = function (component) {
-    var query = window.location.search.substring(1),
-        params = new URLSearchParams(query),
-        key = params.get('q'),
-        upcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en&page=' + component.i;
+    var upcoming = 'https://api.themoviedb.org/3/movie/upcoming?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en&page=' + component.i;
 
-    component.query = key !== null ? key : '';
     component.requesting = true;
 
     if (!component.requested) {
@@ -25676,19 +25691,6 @@ Vue.prototype.getMovies = function (component) {
         component.requesting = false;
     }
     component.revalidate();
-};
-
-Vue.prototype.getModal = function (component) {
-    var query = window.location.search.substring(1),
-        params = new URLSearchParams(query),
-        key = params.get('postHandler');
-
-    if (key !== null) {
-        component.postHandler(key);
-        component.showModal = true;
-
-        this.$router.push(key);
-    }
 };
 
 /***/ }),
@@ -31246,7 +31248,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.content {\n  display: block;\n  width: 100%;\n}\n.p-orn {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it {\n  display: block;\n  width: 500px;\n  padding: 30px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it-lnk {\n    text-decoration: none;\n    cursor: pointer;\n    display: block;\n}\n.it-ttl, .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 12px;\n}\n.it-img {\n    width: 100%;\n    height: auto;\n    display: block;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 300px;\n  z-index: 20;\n  opacity: 1;\n  visibility: visible;\n  -webkit-transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n}\n.filter.ac {\n    opacity: 1;\n    visibility: visible;\n}\n.filter input {\n    padding: 10px;\n    border: solid lightpink;\n    border-radius: 10px;\n}\n.filter input:focus {\n      outline: none;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-family: 'Roboto', 'sans-serif';\n}\n.content {\n  display: block;\n  width: 100%;\n}\n.movie-list {\n  margin: 10px;\n}\n.p-orn {\n  display: block;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  opacity: 1;\n  -webkit-transition: opacity .25s ease-in-out, -webkit-filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, -webkit-filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, filter .25s ease-in-out;\n  transition: opacity .25s ease-in-out, filter .25s ease-in-out, -webkit-filter .25s ease-in-out;\n}\n.MD-ACT .p-orn {\n    opacity: .25;\n    -webkit-filter: blur(2px);\n            filter: blur(2px);\n}\n.it {\n  display: block;\n  width: 25%;\n  padding: 30px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.it-inf {\n    position: relative;\n    width: 75%;\n    height: 100px;\n    top: 0;\n    z-index: 1;\n    -webkit-transform: translate3d(0%, -100%, 1px);\n            transform: translate3d(0%, -100%, 1px);\n    background-color: rgba(5, 0, 0, 0.9);\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    opacity: 0;\n    visibility: hidden;\n    -webkit-transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n    transition: opacity .125s ease-in-out, visibility .125s ease-in-out;\n}\n.it-lnk {\n    position: relative;\n    text-decoration: none;\n    cursor: initial;\n    display: block;\n    width: 100%;\n}\n.it-ttl, .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 16px;\n    color: #FFF;\n}\n.it-img {\n    width: 100%;\n    height: 25vh;\n    display: block;\n    cursor: pointer;\n}\n.it:hover .it-inf {\n    opacity: 1;\n    visibility: visible;\n}\n", ""]);
 
 // exports
 
@@ -31284,18 +31286,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             i: 1,
-            j: 1,
             z: 0,
             requested: false,
             requesting: false,
             showModal: false,
-            modalContent: { html: '', info: {}, href: '' },
-            query: '',
+            key: '',
+            modalContent: {},
             posts: []
         };
     },
@@ -31311,57 +31313,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (!_this.requested && _this.bottomOfWindow()) _this.getMovies(_this);
             };
         },
-        postHandler: function postHandler(href) {
-            var FeedComponent = void 0,
-                body = void 0;
+        toggleModal: function toggleModal() {
+            var body = $('body');
 
-            body = $('body');
-            FeedComponent = this;
-
-            function render() {
-                axios.get(href).then(function (result) {
-                    return FeedComponent.modalContent.html = result.data;
-                });
-
-                // Modal Active
+            if (this.showModal) {
                 body.addClass('MD-ACT LOCK');
-            }
-
-            function destroy() {
-                FeedComponent.modalContent.html = '';
-
-                // Modal Active
-                body.removeClass('MD-ACT LOCK');
-            }
-
-            if (href) render();else destroy();
-        },
-        clickModal: function clickModal(event) {
-            if (this.modalOpen) {
-                this.postHandler(false);
-                this.showModal = false;
             } else {
-                var href = event.target.parentElement.getAttribute('href');
-
-                this.modalContent.href = href;
-
-                this.getDetails();
-                this.postHandler(href);
-                this.showModal = true;
+                body.removeClass('MD-ACT LOCK');
+                this.modalContent = '';
             }
         },
-        getDetails: function getDetails(id) {
-            var info = {};
-            axios.get('https://api.themoviedb.org/3/movie/' + id + '?api_key=c5850ed73901b8d268d0898a8a9d8bff&language=en').then(function (details) {
-                info = details.data;
-                console.log(info);
-            });
+        clickMovie: function clickMovie(event, id) {
+            var body = $('body');
+
+            this.key = id;
+            this.getDetails(this);
+            this.showModal = true;
+
+            this.toggleModal();
         }
     },
     beforeMount: function beforeMount() {
-        this.postHandler();
         this.getMovies(this);
-        this.getModal(this);
     },
     mounted: function mounted() {
         this.paginate();
@@ -31385,23 +31358,23 @@ var render = function() {
       _vm.showModal
         ? _c("modal-component", {
             staticClass: "p-dtn",
-            attrs: { html: _vm.modalContent.html, href: _vm.modalContent.href },
+            attrs: { movie: _vm.modalContent },
             on: {
               close: function($event) {
                 _vm.showModal = false
+                _vm.toggleModal()
               }
             }
           })
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "p-orn" }, [
-        _vm.requesting ? _c("h1", [_vm._v("Loading...")]) : _vm._e(),
-        _vm._v(" "),
         _vm.posts.length
           ? _c(
               "div",
               {
                 directives: [{ name: "masonry", rawName: "v-masonry" }],
+                staticClass: "movie-list",
                 attrs: { "transition-duration": "0s", "item-selector": ".it" }
               },
               _vm._l(_vm.posts, function(post, index) {
@@ -31420,11 +31393,11 @@ var render = function() {
                       "a",
                       {
                         staticClass: "it-lnk",
-                        attrs: { href: "/modal" },
+                        attrs: { href: "/" },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            _vm.clickModal($event), _vm.getDetails(post.id)
+                            return _vm.clickMovie($event, post.id)
                           }
                         }
                       },
@@ -31432,21 +31405,23 @@ var render = function() {
                         _c("img", {
                           staticClass: "it-img _lz",
                           attrs: { src: post.poster_path }
-                        }),
-                        _vm._v(" "),
-                        _c("h2", { staticClass: "it-ttl" }, [
-                          _vm._v("Title: " + _vm._s(post.original_title))
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "it-txt" }, [
-                          _vm._v("Genre IDs: " + _vm._s(post.genre_ids))
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "it-txt" }, [
-                          _vm._v("Release Date: " + _vm._s(post.release_date))
-                        ])
+                        })
                       ]
-                    )
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "it-inf" }, [
+                      _c("h2", { staticClass: "it-ttl" }, [
+                        _vm._v("Title: " + _vm._s(post.original_title))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "it-txt" }, [
+                        _vm._v("Genre IDs: " + _vm._s(post.genre_ids))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "it-txt" }, [
+                        _vm._v("Release Date: " + _vm._s(post.release_date))
+                      ])
+                    ])
                   ]
                 )
               }),
@@ -31454,9 +31429,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        !_vm.posts.length
-          ? _c("h2", [_vm._v("Ops! No results found for " + _vm._s(_vm.query))])
-          : _vm._e()
+        !_vm.posts.length ? _c("h2", [_vm._v("Loading...")]) : _vm._e()
       ])
     ],
     1
@@ -31558,7 +31531,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 300px;\n  z-index: 20;\n  opacity: 1;\n  visibility: visible;\n  -webkit-transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n}\n.filter.ac {\n    opacity: 1;\n    visibility: visible;\n}\n.filter input {\n    padding: 10px;\n    border: solid lightpink;\n    border-radius: 10px;\n}\n.filter input:focus {\n      outline: none;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n.search {\n  display: block;\n  width: 100%;\n}\n.search-content {\n    display: inline-block;\n    width: 100%;\n}\n.search-content .it {\n      display: block;\n      width: 25%;\n      padding: 50px;\n      -webkit-box-sizing: border-box;\n              box-sizing: border-box;\n}\n.search-content .it-lnk {\n        text-decoration: none;\n        cursor: pointer;\n        display: block;\n}\n.search-content .it-ttl {\n        display: block;\n        text-align: center;\n        font-size: 12px;\n}\n.search-content .it-img {\n        width: 100%;\n        height: 200px;\n        display: block;\n}\n.search-text {\n    position: absolute;\n    top: 25%;\n    color: #0663B9;\n}\n.search-text.no {\n      color: red;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.filter {\n  position: fixed;\n  top: 0;\n  left: 50%;\n  width: 300px;\n  z-index: 20;\n  opacity: 1;\n  visibility: visible;\n  -webkit-transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;\n}\n.filter.ac {\n    opacity: 1;\n    visibility: visible;\n}\n.filter input {\n    padding: 10px;\n    border: solid lightpink;\n    border-radius: 10px;\n}\n.filter input:focus {\n      outline: none;\n}\n.filter span {\n    display: block;\n    margin: 5px 0;\n    font-weight: 800;\n}\n.search {\n  display: block;\n  width: 100%;\n}\n.search-content {\n    display: inline-block;\n    width: 100vw;\n}\n.search-content .it {\n      display: block;\n      width: 25%;\n      -webkit-box-sizing: border-box;\n              box-sizing: border-box;\n}\n.search-content .it-lnk {\n        text-decoration: none;\n        cursor: initial;\n        display: block;\n}\n.search-content .it-ttl {\n        display: block;\n        text-align: center;\n        font-size: 12px;\n}\n.search-content .it-img {\n        width: 50%;\n        height: 25vh;\n        display: block;\n        cursor: pointer;\n}\n.search-text {\n    position: absolute;\n    top: 25%;\n    color: #0663B9;\n}\n.search-text.no {\n      color: red;\n}\n", ""]);
 
 // exports
 
@@ -31594,21 +31567,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            filterby: [],
+            searchby: [],
             keyword: '',
+            j: 1,
+            modalContent: {},
+            showModal: false,
             filtered: false,
             requesting: false
         };
     },
 
     methods: {
+        bottomOfWindow: function bottomOfWindow() {
+            return window.pageYOffset + window.innerHeight === document.documentElement.offsetHeight;
+        },
+        paginate: function paginate() {
+            var _this = this;
+
+            window.onscroll = function () {
+                if (!_this.filtered && _this.bottomOfWindow()) _this.searchPosts(_this);
+            };
+        },
         search: function search() {
             this.filtered = false;
             this.searchPosts(this);
+        },
+        toggleModal: function toggleModal() {
+            var body = $('body');
+
+            if (this.showModal) {
+                body.addClass('MD-ACT LOCK');
+            } else {
+                body.removeClass('MD-ACT LOCK');
+                this.modalContent = '';
+            }
+        },
+        clickMovie: function clickMovie(event, id) {
+            var body = $('body');
+
+            this.key = id;
+            this.getDetails(this);
+            this.showModal = true;
+
+            this.toggleModal();
         }
     }
 
@@ -31628,6 +31637,19 @@ var render = function() {
     [
       _c("menu-component"),
       _vm._v(" "),
+      _vm.showModal
+        ? _c("modal-component", {
+            staticClass: "p-dtn",
+            attrs: { movie: _vm.modalContent },
+            on: {
+              close: function($event) {
+                _vm.showModal = false
+                _vm.toggleModal()
+              }
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "filter" }, [
         _c("input", {
           directives: [
@@ -31638,7 +31660,7 @@ var render = function() {
               expression: "keyword"
             }
           ],
-          attrs: { type: "text", placeholder: "Search it .." },
+          attrs: { type: "text", placeholder: "Movie name .." },
           domProps: { value: _vm.keyword },
           on: {
             input: function($event) {
@@ -31650,8 +31672,8 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _vm.filterby.length
-          ? _c("span", [_vm._v(_vm._s(_vm.filterby.length) + " posts found")])
+        _vm.searchby.length
+          ? _c("span", [_vm._v(_vm._s(_vm.searchby.length) + " posts found")])
           : _vm._e(),
         _vm._v(" "),
         _c(
@@ -31669,13 +31691,13 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      !_vm.keyword && _vm.filterby.length <= 0
+      !_vm.keyword && _vm.searchby.length <= 0
         ? _c("h2", { staticClass: "search-text" }, [
-            _vm._v("Faça a sua procura de posts!")
+            _vm._v("Search for any movie!")
           ])
         : _vm._e(),
       _vm._v(" "),
-      _vm.keyword && _vm.filterby.length
+      _vm.keyword && _vm.searchby.length
         ? _c(
             "div",
             {
@@ -31683,39 +31705,46 @@ var render = function() {
               staticClass: "search-content",
               attrs: { "transition-duration": "0s", "item-selector": ".it" }
             },
-            _vm._l(_vm.filterby, function(filtred, index) {
+            _vm._l(_vm.searchby, function(movie, index) {
               return _c(
                 "div",
                 {
                   directives: [
                     { name: "masonry-tile", rawName: "v-masonry-tile" }
                   ],
-                  key: filtred.id,
-                  staticClass: "it filtered _lz",
-                  attrs: { id: filtred.id }
+                  key: index,
+                  staticClass: "it",
+                  attrs: { id: index }
                 },
                 [
                   _c(
                     "a",
                     {
                       staticClass: "it-lnk",
-                      attrs: { href: index % 2 === 0 ? "/modal" : "/ladom" },
+                      attrs: { href: "/" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          _vm.clickModal($event),
-                            _vm.getInfo(_vm.filterby[index])
+                          return _vm.clickMovie($event, movie.id)
                         }
                       }
                     },
                     [
                       _c("img", {
                         staticClass: "it-img _lz",
-                        attrs: { src: filtred.post_image }
+                        attrs: { src: movie.poster_path }
                       }),
                       _vm._v(" "),
                       _c("h2", { staticClass: "it-ttl" }, [
-                        _vm._v(_vm._s(filtred.post_title))
+                        _vm._v("Title: " + _vm._s(movie.original_title))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "it-txt" }, [
+                        _vm._v("Genre IDs: " + _vm._s(movie.genre_ids))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "it-txt" }, [
+                        _vm._v("Release Date: " + _vm._s(movie.release_date))
                       ])
                     ]
                   )
@@ -31724,8 +31753,10 @@ var render = function() {
             }),
             0
           )
-        : _vm.keyword && !_vm.filterby.length
-        ? _c("h2", { staticClass: "search-text no" }, [_vm._v("NÃO TEM NADA")])
+        : _vm.keyword && !_vm.searchby.length
+        ? _c("h2", { staticClass: "search-text no" }, [
+            _vm._v("Movie Not Found!")
+          ])
         : _vm._e()
     ],
     1
@@ -31824,10 +31855,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(1)(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,700);", ""]);
+
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: 'Open Sans', sans-serif;\n  font-weight: 300;\n}\n.label {\n  border: solid red;\n}\nstrong {\n  font-weight: 600;\n}\n.p-dtn {\n  display: block;\n  position: fixed;\n  visibility: hidden;\n  opacity: 0;\n  top: 0;\n  width: 100vw;\n  height: 100%;\n  z-index: 10;\n  overflow-y: scroll;\n  background-color: #FFF;\n}\n.MD-ACT .p-dtn {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-mask {\n  visibility: hidden;\n  opacity: 0;\n}\n.modal-mask.popup {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n  position: fixed;\n  top: 0;\n}\n.modal-enter, .modal-modal-active {\n  opacity: 0;\n}\n.c-tc {\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n.c-tc-ttl {\n    -webkit-transition: opacity ease-in .25s;\n    transition: opacity ease-in .25s;\n    line-height: 1.09em;\n    letter-spacing: -.03em;\n    font-size: 4em;\n}\n.c-tc-ttl.f32 {\n      font-size: 2em;\n}\n.c-tc-em {\n    font-weight: 300;\n}\n.c-tc-txt {\n    -webkit-transition: opacity ease-in .25s;\n    transition: opacity ease-in .25s;\n    line-height: 1.5em;\n    font-family: 'sans-serif';\n    font-weight: 400;\n    letter-spacing: 0;\n    font-size: 1em;\n    color: lightgray;\n    padding-top: 1.25em;\n    font-size: 1em;\n}\n.c-tc-ttl, .c-tc-txt {\n    text-align: center;\n    width: 100%;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
+exports.push([module.i, "\n.p-dtn {\n  display: block;\n  position: fixed;\n  visibility: hidden;\n  opacity: 0;\n  top: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  width: 50vw;\n  left: 50%;\n  height: 75vh;\n  z-index: 10;\n  border-radius: 5vw;\n  background-color: #0663B9;\n}\n.MD-ACT .p-dtn {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-mask {\n  visibility: hidden;\n  opacity: 0;\n}\n.modal-mask.popup {\n    visibility: visible;\n    opacity: 1;\n}\n.modal-body {\n  padding-top: 50px;\n}\n.modal-body-wr {\n    padding: 0 50px;\n}\n.modal-body .it-img {\n    width: 250px;\n    margin: 0 auto;\n    padding: 20px 0;\n    display: block;\n}\n.modal-body .it-ttl, .modal-body .it-txt {\n    display: block;\n    text-align: center;\n    font-size: 16px;\n    letter-spacing: .1em;\n}\n.modal-body .it-ttl {\n    font-size: 32px;\n}\n.modal-default-button {\n  right: 0;\n  position: fixed;\n  top: 0;\n  background-color: #e5e5e5;\n  width: 50px;\n  height: 40px;\n  font-size: 32px;\n  -webkit-transform: translate(50%, -50%);\n          transform: translate(50%, -50%);\n  border: none;\n  cursor: pointer;\n  border-radius: 10vw;\n}\n", ""]);
 
 // exports
 
@@ -31858,20 +31889,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    html: null,
-    popup: {},
-    href: ''
-  },
-  mounted: function mounted() {
-    if (this.$router.currentRoute.path !== '/where') {
-      this.$router.push(this.href);
-    }
-  },
-  destroyed: function destroyed() {
-    this.$router.push('/home');
+    movie: {}
   }
 });
 
@@ -31889,22 +31911,27 @@ var render = function() {
       { staticClass: "modal-body" },
       [
         _vm._t("body", [
-          _vm.html
-            ? _c("div", { domProps: { innerHTML: _vm._s(_vm.html) } })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.popup
-            ? _c("div", [
-                _c("h2", { staticClass: "pin-title" }, [
-                  _vm._v(_vm._s(_vm.popup.name))
+          _vm.movie
+            ? _c("section", { staticClass: "modal-body-wr" }, [
+                _c("h2", { staticClass: "it-ttl" }, [
+                  _vm._v("Title: " + _vm._s(_vm.movie.original_title))
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "pin-address" }, [
-                  _vm._v(_vm._s(_vm.popup.address))
+                _c("img", {
+                  staticClass: "it-img _lz",
+                  attrs: { src: _vm.movie.poster_path }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "it-txt" }, [
+                  _vm._v("Genre: " + _vm._s(_vm.movie.genre))
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "pin-fone" }, [
-                  _vm._v(_vm._s(_vm.popup.phone))
+                _c("span", { staticClass: "it-txt" }, [
+                  _vm._v("Overview: " + _vm._s(_vm.movie.overview))
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "it-txt" }, [
+                  _vm._v("Release Date: " + _vm._s(_vm.movie.release_date))
                 ])
               ])
             : _vm._e()
@@ -31923,7 +31950,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v(" Fechar ")]
+      [_vm._v(" X ")]
     )
   ])
 }
