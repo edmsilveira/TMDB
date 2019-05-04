@@ -41,6 +41,15 @@
         };
     },
     methods: {
+        bottomOfWindow() {
+                return window.pageYOffset + window.innerHeight === document.documentElement.offsetHeight;
+            },
+        paginate() {
+            window.onscroll = () => {
+                if (!this.filtered && this.bottomOfWindow())
+                    this.searchPosts(this);
+            }
+        },
          search() {
             this.filtered = false;
             this.searchPosts(this);

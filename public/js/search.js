@@ -31586,6 +31586,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        bottomOfWindow: function bottomOfWindow() {
+            return window.pageYOffset + window.innerHeight === document.documentElement.offsetHeight;
+        },
+        paginate: function paginate() {
+            var _this = this;
+
+            window.onscroll = function () {
+                if (!_this.filtered && _this.bottomOfWindow()) _this.searchPosts(_this);
+            };
+        },
         search: function search() {
             this.filtered = false;
             this.searchPosts(this);
