@@ -59,6 +59,11 @@
             }
 
             this.filtered = false;
+
+            if(this.searchby.length > 0) {
+                this.searchby = [];
+            }
+
             this.searchPosts(this);
         },
         toggleModal() {

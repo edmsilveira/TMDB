@@ -96,13 +96,25 @@ body {
     position: fixed;
     top: 0;
     left: 50%;
-    width: 500px;
+    width: 350px;
     z-index: 20;
     transform: translate3d(-50%,200%,1px);
     transition: transform .5s ease-in-out;
+    background-color: transparent;
+    border-radius: 10px;
 
     .found-posts & {
         transform: translate3d(-50%,0,1px);
+        background-color: $color-accent-3;
+
+        &:hover {
+            .filter-submit {
+                opacity: 1;
+                visibility: visible;
+                position: initial;
+            }
+            
+        }
     }
 
     .MD-ACT & {
@@ -110,13 +122,16 @@ body {
         filter: blur(2px);
     }
 
+    
+
 
     &-input {
         border: none;
-        border-radius: 20px;
+        background-color: transparent;
         width: 100%;
         text-align: center;
         position: relative;
+        padding: 10px 0;
         left: 50%;
         transform: translate3d(-50%,0,1px);
         right: 0;
@@ -124,24 +139,41 @@ body {
         font-size: 32px;
 
         &:placeholder {
-            color: $color-black-light-2;            
+            color: $color-white;            
         }
 
         &:focus {
             outline: none;
         }
+
+        .found-posts & {
+            transform: translate3d(-50%,0,1px);
+            color: $color-white;
+
+            &:placeholder {
+                color: $color-white;            
+            }
+        }
     }
 
     &-submit {
         border: none;
-        border-radius: 30px;
+        border-radius: 10px;
         background: teal;
         display: block;
         margin: 20px auto;
         width: 150px;
         height: 50px;
         color: #fff;
+        transition: position 0s ease-in-out, opacity .25s ease-in-out, visibility .25s ease-in-out;
         cursor: pointer;
+
+        .found-posts & {
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            transform: translate3d(0%,0,1px);
+        }
     }
 
     span {
