@@ -57,6 +57,10 @@ body {
                 text-align: center;
                 font-size: 16px;
                 color: $color-white;
+
+                @media (max-width: $mobile) {
+                    font-size: 12px;
+                }
             }
         
         
@@ -107,6 +111,10 @@ body {
         transform: translate3d(-50%,0,1px);
         background-color: $color-accent-3;
 
+        @media (max-width: $mobile) {
+            background-color: transparent;
+        }
+
         &:hover {
             .filter-submit {
                 opacity: 1;
@@ -153,7 +161,17 @@ body {
             &:placeholder {
                 color: $color-white;            
             }
+
+            @media (max-width: $mobile) {
+                color: $color-black;
+    
+                &:placeholder {
+                    color: $color-black;            
+                }
+            }
         }
+
+
     }
 
     &-submit {

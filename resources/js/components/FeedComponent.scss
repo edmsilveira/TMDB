@@ -70,6 +70,10 @@ body {
         text-align: center;
         font-size: 16px;
         color: $color-white;
+
+        @media (max-width: $mobile) {
+            font-size: 12px;
+        }
     }
 
     &-img {
