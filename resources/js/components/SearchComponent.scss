@@ -10,6 +10,11 @@ body {
     font-family: 'Roboto', 'sans-serif';
 }
 
+.menu {
+    position: relative;
+    z-index: 30;
+}
+
 .search {
     display: block;
     width: 100%;
