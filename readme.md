@@ -1,5 +1,3 @@
-<p align="center"><img src="https://kobe.io/wp-content/uploads/2018/07/favicon-1.png"></p>
-
 <p align="center">TMDB Upcoming List Beta Version</p>
 
 ## About the app
